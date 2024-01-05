@@ -8,6 +8,6 @@ It uses openai api under the hood to find the vulnerabilities.
 
 1.Better vuln detection.
 
-2.Fix numbering issue in diff files generated.
+2.Fix issues with diff files generated.
 
 3.Support for a codebase instead of single .c/.cpp file.
