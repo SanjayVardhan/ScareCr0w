@@ -1,0 +1,13 @@
+--- a/source.c
++++ b/source.c
+@@ -3,8 +3,8 @@
+ int main() {
+     int secret = 42;
+     char buffer[100];
+-    printf("Enter your name: ");
+-    gets(buffer);
++    printf("Enter your name (max 99 characters): ");
++    fgets(buffer, 100, stdin);
+     printf("%s", buffer);
+     return 0;
+ }
