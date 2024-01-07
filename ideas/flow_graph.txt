@@ -1,0 +1,42 @@
+main() <int main () at source.c:179>:
+    setvbuf()
+    menu() <void menu () at source.c:142>:
+        printf()
+    printf()
+    fgets()
+    strcspn()
+    handle_command() <void handle_command (char *cmd) at source.c:153>:
+        sscanf()
+        create() <void create (char *name) at source.c:89>:
+            find_empty_slot() <int find_empty_slot () at source.c:71>
+            printf()
+            create_file() <struct file *create_file (char *name) at source.c:58>:
+                calloc()
+                strncpy()
+                ctf_file_close() <void ctf_file_close (struct file *f) at source.c:22>:
+                    free()
+                ctf_file_read() <void ctf_file_read (struct file *f, int n) at source.c:32>:
+                    printf()
+                    fwrite()
+                ctf_file_write() <void ctf_file_write (struct file *f, int n, char *s) at source.c:41>:
+                    realloc()
+                    memcpy()
+                    printf()
+                ctf_file_dup() <void ctf_file_dup (struct file *f) at source.c:53>:
+                    printf()
+        free()
+        close() <void close (char *name) at source.c:100>:
+            find_file_by_name() <int find_file_by_name (char *name) at source.c:80>
+            printf()
+        dup() <void dup (char *name) at source.c:112>:
+            find_file_by_name() <int find_file_by_name (char *name) at source.c:80>
+            printf()
+        read() <void read (char *name, int n) at source.c:122>:
+            find_file_by_name() <int find_file_by_name (char *name) at source.c:80>
+            printf()
+        write() <void write (char *name, int n, char *s) at source.c:132>:
+            find_file_by_name() <int find_file_by_name (char *name) at source.c:80>
+            printf()
+        strcmp()
+        exit()
+        printf()

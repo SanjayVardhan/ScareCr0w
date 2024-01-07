@@ -1,0 +1,24 @@
+1:  diff --git a/source.c b/source.c
+2:  index e739ac0..dce5506 100644
+3:  --- a/source.c
+4:  +++ b/source.c
+5:  @@ -26,6 +26,8 @@ void ctf_file_close(struct file *f) {
+6:           free(f->data);
+7:           f->data = NULL;
+8:           free(f);
+9:  +        f = NULL;
+10:  +        files[slot] = NULL;
+11:       }
+12:    }
+13:
+14: @@ -60,7 +62,7 @@ struct file *create_file(char *name) {
+15:       struct file *f = calloc(1, sizeof(struct file));
+16:       f->refcount = 1;
+17:       f->data_len = 0;
+18:       f->data = NULL;
+19:  -    strncpy(f->name, name, MAX_NAME - 1);
+20:  +    snprintf(f->name, MAX_NAME, "%s", name);
+21:       f->close_func = ctf_file_close;
+22:       f->read_func = ctf_file_read;
+23:       f->write_func = ctf_file_write;
+24:       f->dup_func = ctf_file_dup;

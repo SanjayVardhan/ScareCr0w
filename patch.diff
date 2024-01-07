@@ -1,13 +1,45 @@
---- a/source.c
-+++ b/source.c
-@@ -3,8 +3,8 @@
- int main() {
-     int secret = 42;
-     char buffer[100];
--    printf("Enter your name: ");
--    gets(buffer);
-+    printf("Enter your name (max 99 characters): ");
-+    fgets(buffer, 100, stdin);
-     printf("%s", buffer);
-     return 0;
+--- source.c
++++ source.c
+@@ -59,10 +59,12 @@
+     struct file *f = calloc(1, sizeof(struct file));
++    if (!f) {
++        printf("Memory allocation failed\n");
++        return NULL;
++    }
+     f->refcount = 1;
+     f->data_len = 0;
+     f->data = NULL;
+-    strncpy(f->name, name, MAX_NAME - 1);
++    strncpy(f->name, name, MAX_NAME - 2);
++    f->name[MAX_NAME - 1] = '\0';
+     f->close_func = ctf_file_close;
+     f->read_func = ctf_file_read;
+     f->write_func = ctf_file_write;
+@@ -25,7 +27,10 @@
+     }
+     if (f->refcount == 0) {
+-        free(f->data);
+-        free(f);
++        if (f->data) {
++            free(f->data);
++        }
++        if (f) {
++            free(f);
+         }
+     }
+ }
+@@ -45,8 +50,11 @@
+     if (n > f->data_len) {
+-        f->data = realloc(f->data, n);
++        char *tmp = realloc(f->data, n);
++        if (!tmp) {
++            printf("Memory re-allocation failed\n");
++            return;
++        }
++        f->data = tmp;
+         f->data_len = n;
+     }
+-    memcpy(f->data, s, n);
++    memcpy(f->data, s, f->data_len);
+     printf("Writing %d bytes to %s\n", n, f->name);
  }
